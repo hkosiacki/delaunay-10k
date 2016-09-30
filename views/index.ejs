@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Delaunay Triangulation Wallpaper 10K</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>Delaunay Triangulation Wallpaper 10K</h1>
+    <div>
+      <p>This small application lets you create triangle-filled gradient backgrounds, perfect for your device's wallpaper.</p>
+      <p>After you customize the parameters to your liking, you can preview the result below or download the full size image.</p>
+      <p>Have fun!</p>
+    </div>
+  </header>
+  <main>
+    <form id="f" method="get" action="/download">
+      <fieldset>
+        <legend>Image dimensions:</legend>
+        <p>
+          <input id="w" type="number" min="240" max="2560" name="w" aria-label="width" placeholder="width" value="<%= w %>">
+          ×
+          <input id="h" type="number" min="240" max="2560" name="h" aria-label="height" placeholder="height" value="<%= h %>">
+          pixels
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>Gradient colors:</legend>
+        <p>
+          <label for="hue1">hue 1</label>
+          <input id="hue1" class="hsv" type="range" min="0" max="359" step="1" name="hue1" value="<%= hue1 %>">
+          <output for="hue1">(0 – 359)</output>
+        </p>
+        <p>
+          <label for="hue2">hue 2</label>
+          <input id="hue2" class="hsv" type="range" min="0" max="359" step="1" name="hue2" value="<%= hue2 %>">
+          <output for="hue2">(0 – 359)</output>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>Triangles:</legend>
+        <p>
+          <label for="grid">base grid size</label>
+          <input id="grid" type="range" min="25" max="250" step="25" name="grid" value="<%= grid %>">
+          <output for="grid">(25 – 250)</output>
+        </p>
+        <p>
+          <label for="disp">dispersion radius</label>
+          <input id="disp" type="range" min="0" max="45" step="5" name="disp" value="<%= disp %>">
+          <output for="disp">(0 – 45%)</output>
+        </p>
+      </fieldset>
+      <div id="btns">
+        <button id="get-pv" formaction="/" type="submit">See the preview (under&nbsp;4KB)</button>
+        <button id="dl" type="submit" formtarget="_blank">Download full size image (may take a&nbsp;moment)</button>
+      </div>
+      <div id="save" style="display: none;">
+        <p>Live JavaScript preview is enabled!</p>
+        <p>Right-click the preview image and select "Save Image".</p>
+      </div>
+    </form>
+    <div id="pv">
+      <% if (preview) { %>
+        <img id="image" src="/preview?w=<%= w %>&amp;h=<%= h %>&amp;hue1=<%= hue1 %>&amp;hue2=<%= hue2 %>&amp;grid=<%= grid %>&amp;disp=<%= disp %>" alt="preview">
+      <% } %>
+      <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+  </main>
+  <script src="/vendor.min.js"></script>
+  <script src="/local.js"></script>
+</body>
+</html>

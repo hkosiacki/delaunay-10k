@@ -29,4 +29,4 @@ app.get('/download', (req, res) => {
   res.type('image/jpeg').send(generate(validate(req.query), true));
 });
 
-app.listen(80);
+app.listen(process.env.PORT || 80);
